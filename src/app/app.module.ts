@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { TableComponent } from './table/table.component';
 import {FetchDataService} from "./shared/fetch-data.service";
-import {NgbdModalComponen, NgbdModalContent} from './modal/modal.component';
+
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
 
@@ -25,8 +25,7 @@ const appRoutes: Routes = [
     HomeComponent,
     HeaderComponent,
     TableComponent,
-    NgbdModalContent,
-    NgbdModalComponen,
+
   ],
   imports: [
     BrowserModule,
@@ -37,7 +36,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  entryComponents:[NgbdModalContent],
+  entryComponents:[],
   providers: [FetchDataService],
   bootstrap: [AppComponent]
 })

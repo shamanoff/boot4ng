@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {User} from "../shared/user";
+import {Component, OnInit} from '@angular/core';
 import {FetchDataService} from "../shared/fetch-data.service";
 import {Observable} from "rxjs/Observable";
 import * as _ from 'lodash';
-import {NgbdModalComponen} from "../modal/modal.component";
+import {User} from "../shared/user";
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-table',
@@ -12,21 +12,52 @@ import {NgbdModalComponen} from "../modal/modal.component";
 
 })
 export class TableComponent implements OnInit {
-@ViewChild('app-modal')appModal: NgbdModalComponen;
-  users: Observable<any>;
-  constructor(private _dataServ: FetchDataService) { }
+  users: User[] = [];
+  fetchedUsers: Observable<any>;
+  onEditUser;
+
+  constructor(private _dataServ: FetchDataService) {
+    console.log('constructor');
+    this.fetchedUsers = this._dataServ.fetchData();
+
+
+  }
+
+  public isCollapsed = false;
 
   ngOnInit() {
-    this.users = this._dataServ.fetchData();
+    console.log('oninit');
+    // this.users = this._dataServ.fetchData();
+    this.uploadUsers(this.fetchedUsers);
   }
 
-  /*openModal(user){
-    this.appModal.open();
-  }*/
-  saveEditUser(user){
+  uploadUsers(fetchedUsers){
+   fetchedUsers.map(
+     res => this.users = res
+   ).subscribe();
 
   }
-  deleteUser(id){
+  close() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
+  openEditForm(user) {
+    this.isCollapsed = !this.isCollapsed;
+    this.onEditUser = user;
+  }
+
+  saveEditedUser(){
+    let n = this.onEditUser.id;
+    let index = _.findIndex(this.users, {id: n});
+    console.log(index);
+
+    // const ID = this.onEditUser.id;
+    this.users[index] = Object.assign(this.onEditUser);
+
+    this.isCollapsed = !this.isCollapsed;
+  }
+  deleteUser(id) {
+    let index = _.findIndex(this.users, {id: id});
+    this.users.splice(index, 1);
   }
 }
