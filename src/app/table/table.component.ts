@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FetchDataService} from "../shared/fetch-data.service";
-import {Observable} from "rxjs/Observable";
+import {FetchDataService} from '../shared/fetch-data.service';
+import {Observable} from 'rxjs/Observable';
 import * as _ from 'lodash';
-import {User} from "../shared/user";
+import {User} from '../shared/user';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -31,7 +31,7 @@ export class TableComponent implements OnInit {
     this.uploadUsers(this.fetchedUsers);
   }
 
-  uploadUsers(fetchedUsers){
+  uploadUsers(fetchedUsers) {
    fetchedUsers.map(
      res => this.users = res
    ).subscribe();
@@ -46,9 +46,9 @@ export class TableComponent implements OnInit {
     this.onEditUser = user;
   }
 
-  saveEditedUser(){
-    let n = this.onEditUser.id;
-    let index = _.findIndex(this.users, {id: n});
+  saveEditedUser() {
+    const n = this.onEditUser.id;
+    const index = _.findIndex(this.users, {id: n});
     console.log(index);
 
     // const ID = this.onEditUser.id;
@@ -57,7 +57,7 @@ export class TableComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
   }
   deleteUser(id) {
-    let index = _.findIndex(this.users, {id: id});
+    const index = _.findIndex(this.users, {id: id});
     this.users.splice(index, 1);
   }
 }

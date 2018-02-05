@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-body">
+    <h2>Users Modal Version</h2>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td scope="row">{{user.id}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email}}</td>
+
+        <td><i style=" cursor:pointer" (click)="onEditItem(user)" class="material-icons">create</i></td>
+        <td><i style=" cursor:pointer" class="material-icons">delete</i></td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template ngbModalContainer></ng-template>

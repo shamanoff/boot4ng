@@ -11,10 +11,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { TableComponent } from './table/table.component';
-import {FetchDataService} from "./shared/fetch-data.service";
+import {FetchDataService} from './shared/fetch-data.service';
+import { ModalComponent } from './modal/modal.component';
+import { ModalContentComponent } from './modal-content/modal-content.component';
+import {ModalService} from './shared/modal.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'modal', component: ModalComponent},
 
 ];
 
@@ -25,6 +29,8 @@ const appRoutes: Routes = [
     HomeComponent,
     HeaderComponent,
     TableComponent,
+    ModalComponent,
+    ModalContentComponent,
 
   ],
   imports: [
@@ -36,8 +42,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  entryComponents:[],
-  providers: [FetchDataService],
+  entryComponents:[ModalContentComponent],
+  providers: [FetchDataService, ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
