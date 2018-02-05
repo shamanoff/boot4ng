@@ -9,6 +9,12 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalContentComponent implements OnInit {
   @Input('user') public user: User;
+  onEditUser = {
+    id: -1,
+    first_name: '',
+    last_name: '',
+    email: ''
+  };
 
   constructor(private _activeModal: NgbActiveModal) {
   }
@@ -16,11 +22,16 @@ export class ModalContentComponent implements OnInit {
   ngOnInit() {
   }
 
-  saveEditedUser() {
-    this._activeModal.close();
+  saveEditedUser(first, last, email) {
+    this.onEditUser.id = this.user.id;
+    this.onEditUser.first_name = first.value;
+    this.onEditUser.last_name = last.value;
+    this.onEditUser.email = email.value;
+    this._activeModal.close(this.onEditUser);
+    console.log(this.onEditUser);
   }
 
   closeModal() {
-    this._activeModal.close();
+    this._activeModal.dismiss();
   }
 }

@@ -12,7 +12,6 @@ import {ModalService} from '../shared/modal.service';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
-
   users: User[] = [];
   fetchedUsers: Observable<any>;
 
@@ -33,10 +32,20 @@ export class ModalComponent implements OnInit {
 
   }
 
+  updateUser(user) {
+    const n = user.id;
+    const index = _.findIndex(this.users, {id: n});
+    console.log(index);
+    this.users[index] = Object.assign(user);
+  }
+
   onEditItem(user: User) {
     const modalRef = this._modalServ.editItem(user);
+    modalRef.result.then(res => this.updateUser(res))
+      .catch(er => console.log(er));
 
   }
+
 
   deleteUser(id) {
     const index = _.findIndex(this.users, {id: id});

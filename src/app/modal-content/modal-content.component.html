@@ -1,14 +1,14 @@
 <div class="modal-body">
 
-  <h2  >Edit User {{user.id}}</h2>
+  <h2 >Edit User {{user.id}}</h2>
   <table  class="table ">
 
     <tbody>
 
-      <tr><input type="text" class="form-control mb-3" [ngModel]="user.first_name"></tr>
-      <tr><input type="text" class="form-control mb-3" [ngModel]="user.last_name"></tr>
-      <tr><input type="text" class="form-control mb-3" [ngModel]="user.email"></tr>
-      <tr><button (click)="saveEditedUser()" type="button" class="btn btn-success btn-block mb-3 ">Save</button></tr>
+      <tr><input type="text" class="form-control mb-3" #first [ngModel]="user.first_name"></tr>
+      <tr><input type="text" class="form-control mb-3" #last [ngModel]="user.last_name"></tr>
+      <tr><input type="text" class="form-control mb-3" #email [ngModel]="user.email"></tr>
+      <tr><button (click)="saveEditedUser( first, last, email)" type="button" class="btn btn-success btn-block mb-3 ">Save</button></tr>
       <tr><button (click)="closeModal()" type="button" class="btn btn-outline-dark btn-block"><i style=" cursor:pointer" class="material-icons" >clear</i></button></tr>
 
     </tbody>
