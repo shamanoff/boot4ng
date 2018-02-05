@@ -15,7 +15,6 @@ export class ModalComponent implements OnInit {
   users: User[] = [];
   fetchedUsers: Observable<any>;
 
-
   constructor(private _dataServ: FetchDataService, private _modalServ: ModalService) {
     console.log('modal constructor');
     this.fetchedUsers = this._dataServ.fetchData();
@@ -33,10 +32,12 @@ export class ModalComponent implements OnInit {
 
   }
 
+  addUser(user){
+    this.users.push(user);
+  }
   updateUser(user) {
     const n = user.id;
     const index = _.findIndex(this.users, {id: n});
-    console.log(index);
     this.users[index] = Object.assign(user);
   }
 
@@ -44,9 +45,7 @@ export class ModalComponent implements OnInit {
     const modalRef = this._modalServ.editItem(user);
     modalRef.result.then(res => this.updateUser(res))
       .catch(er => console.log(er));
-
   }
-
 
   deleteUser(id) {
     const index = _.findIndex(this.users, {id: id});
@@ -56,9 +55,7 @@ export class ModalComponent implements OnInit {
   addNewUser() {
     const modalRef = this._modalServ.addItem();
     modalRef.result
-      .then((addedItem) => {
-        console.log(addedItem);
-      })
+      .then(res => this.addUser(res))
       .catch(() => undefined);
   }
 }

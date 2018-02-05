@@ -23,7 +23,10 @@ export class ModalContentComponent implements OnInit {
   }
 
   saveEditedUser(first, last, email) {
-    this.onEditUser.id = this.user.id;
+    if(this.user.id === -1){
+      this.onEditUser.id = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+    }else {this.onEditUser.id = this.user.id;}
+
     this.onEditUser.first_name = first.value;
     this.onEditUser.last_name = last.value;
     this.onEditUser.email = email.value;
