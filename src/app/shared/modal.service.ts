@@ -5,7 +5,12 @@ import {User} from './user';
 
 @Injectable()
 export class ModalService {
-
+  user = {
+    id: -1,
+    first_name: '',
+    last_name: '',
+    email: ''
+  };
   constructor(private modalService: NgbModal) {
   }
   public editItem(user: User): NgbModalRef {
@@ -15,6 +20,7 @@ export class ModalService {
   }
   public addItem(): NgbModalRef {
     const modalRef = this.modalService.open(ModalContentComponent);
+    modalRef.componentInstance.user = this.user;
     return modalRef;
   }
 
