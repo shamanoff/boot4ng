@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../shared/user';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal-content',
@@ -9,10 +10,17 @@ import {User} from '../shared/user';
 export class ModalContentComponent implements OnInit {
   @Input('user') public user: User;
 
-  constructor() {
+  constructor(private _activeModal: NgbActiveModal) {
   }
 
   ngOnInit() {
   }
 
+  saveEditedUser() {
+    this._activeModal.close();
+  }
+
+  closeModal() {
+    this._activeModal.close();
+  }
 }

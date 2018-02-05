@@ -17,12 +17,12 @@ export class ModalComponent implements OnInit {
   fetchedUsers: Observable<any>;
 
   constructor(private _dataServ: FetchDataService, private _modalServ: ModalService) {
-    console.log('constructor');
+    console.log('modal constructor');
     this.fetchedUsers = this._dataServ.fetchData();
   }
 
   ngOnInit() {
-    console.log('oninit');
+    console.log('modal oninit');
     this.uploadUsers(this.fetchedUsers);
   }
 
@@ -33,9 +33,14 @@ export class ModalComponent implements OnInit {
 
   }
 
-  private onEditItem(user: User) {
+  onEditItem(user: User) {
     const modalRef = this._modalServ.editItem(user);
 
+  }
+
+  deleteUser(id) {
+    const index = _.findIndex(this.users, {id: id});
+    this.users.splice(index, 1);
   }
 
 }

@@ -20,11 +20,11 @@
         <td>{{user.email}}</td>
 
         <td><i style=" cursor:pointer" (click)="onEditItem(user)" class="material-icons">create</i></td>
-        <td><i style=" cursor:pointer" class="material-icons">delete</i></td>
+        <td><i style=" cursor:pointer" (click)="deleteUser(user.id)" class="material-icons">delete</i></td>
       </tr>
 
       </tbody>
     </table>
   </div>
 </div>
-<ng-template ngbModalContainer></ng-template>
+<!--<ng-template ngbModalContainer ></ng-template>-->
